@@ -1,0 +1,14 @@
+/run/
+/src/main/java/poisontrigger/kteams/TODO.txt
+/build/natives/
+/build/reobfJar/
+/build/resources/
+/build/tmp/
+/build/generated/
+/build/extractSrg/
+/build/extractMappings/
+/build/downloadMcpConfig/
+/build/downloadMCMeta/
+/build/createSrgToMcp/
+/build/createMcpToSrg/
+/build/classes/
