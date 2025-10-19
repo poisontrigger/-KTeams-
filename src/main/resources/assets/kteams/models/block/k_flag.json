@@ -1,0 +1,14 @@
+{
+  "parent": "block/block",
+  "textures": { "particle": "kteams:blocks/flag_pole", "pole": "kteams:blocks/flag_pole" },
+  "elements": [
+    { "from":[6,0,6], "to":[10,16,10],
+      "faces":{"north":{"texture":"#pole"},"south":{"texture":"#pole"},
+        "east":{"texture":"#pole"},"west":{"texture":"#pole"},
+        "up":{"texture":"#pole"},"down":{"texture":"#pole"} } },
+    { "from":[7,16,7], "to":[9,17,9],
+      "faces":{"north":{"texture":"#pole"},"south":{"texture":"#pole"},
+        "east":{"texture":"#pole"},"west":{"texture":"#pole"},
+        "up":{"texture":"#pole"},"down":{"texture":"#pole"} } }
+  ]
+}

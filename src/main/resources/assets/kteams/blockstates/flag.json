@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "facing=north,part=base":   { "model": "kteams:flag_pole" },
+    "facing=south,part=base":   { "model": "kteams:flag_pole" },
+    "facing=west,part=base":    { "model": "kteams:flag_pole" },
+    "facing=east,part=base":    { "model": "kteams:flag_pole" },
+
+    "facing=north,part=middle": { "model": "kteams:flag_pole" },
+    "facing=south,part=middle": { "model": "kteams:flag_pole" },
+    "facing=west,part=middle":  { "model": "kteams:flag_pole" },
+    "facing=east,part=middle":  { "model": "kteams:flag_pole" },
+
+    "facing=north,part=top":    { "model": "kteams:flag_pole_top" },
+    "facing=south,part=top":    { "model": "kteams:flag_pole_top" },
+    "facing=west,part=top":     { "model": "kteams:flag_pole_top" },
+    "facing=east,part=top":     { "model": "kteams:flag_pole_top" }
+  }
+}

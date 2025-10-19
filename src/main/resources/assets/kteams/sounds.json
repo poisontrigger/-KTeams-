@@ -1,0 +1,8 @@
+{
+  "flag.flag_capture": {
+    "sounds": [{ "name": "kteams:flag/flag_capture", "stream": false }]
+  },
+  "flag.flag_capture_complete": {
+    "sounds": [{ "name": "kteams:flag/flag_capture_complete", "stream": false }]
+  }
+}
