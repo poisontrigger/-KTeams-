@@ -12,3 +12,7 @@
 /build/createSrgToMcp/
 /build/createMcpToSrg/
 /build/classes/
+/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+/.gradle/7.4.2/dependencies-accessors/dependencies-accessors.lock
+/.gradle/7.4.2/executionHistory/executionHistory.lock
+/.gradle/7.4.2/fileHashes/fileHashes.lock
