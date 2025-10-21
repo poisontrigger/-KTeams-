@@ -202,8 +202,7 @@ public class TileEntityFlag extends TileEntity implements ITickable {
     public void setCaptureProgress() {
         // safe setter your capture logic can call
         captureProgress = ((float) getPoints()/(float) configHandler.capMaxPoints);
-        System.out.println(getPoints()+ " P");
-        System.out.println(configHandler.capMaxPoints + " M");
+
     }
 
     public int getColor(){ return color; }

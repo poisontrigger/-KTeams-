@@ -145,7 +145,6 @@ public class CaptureFlag {
             double dz = p.posZ - cz;
             return (dx*dx + dz*dz) <= r2; //
         });
-        System.out.println(list);
         return list == null ? Collections.emptyList() : list;
 
     }

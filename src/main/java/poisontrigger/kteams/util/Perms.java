@@ -16,9 +16,9 @@ public class Perms {
     public static final String TEAM_INFO   = ROOT + ".team.info";
     public static final String TEAM_FDELETE   = ROOT + ".team.fdelete";
     public static final String TEAM_FCLAIM   = ROOT + ".team.fclaim";
-    public static final String TEAM_INVITE   = ROOT + ".team.fclaim";
-    public static final String TEAM_ACCEPT   = ROOT + ".team.fclaim";
-    public static final String TEAM_DENY   = ROOT + ".team.fclaim";
+    public static final String TEAM_INVITE   = ROOT + ".team.invite";
+    public static final String TEAM_ACCEPT   = ROOT + ".team.accept";
+    public static final String TEAM_DENY   = ROOT + ".team.deny";
     public static final String TEAM_PROMOTE = ROOT + ".team.promote";
     public static final String TEAM_DEMOTE = ROOT + ".team.demote";
     public static final String TEAM_KICK = ROOT + ".team.kick";

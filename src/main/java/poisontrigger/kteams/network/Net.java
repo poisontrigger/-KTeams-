@@ -4,9 +4,11 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -19,6 +21,7 @@ import poisontrigger.kteams.Blocks.Flag.PacketFlagUpdate;
 import poisontrigger.kteams.Blocks.Flag.PacketFlagUpdateHandler;
 import poisontrigger.kteams.Blocks.Flag.TileEntityFlag;
 import poisontrigger.kteams.Kteams;
+import poisontrigger.kteams.Teams.ClientHooks;
 import poisontrigger.kteams.Teams.ClientTeam;
 
 public final class Net {
@@ -165,7 +168,7 @@ public final class Net {
             }
             return CHANNEL_INSTANCE;
         }
-        @SideOnly(Side.CLIENT)
+
         public static class Handler implements IMessageHandler<S2CSetClientTeam, IMessage> {
             @Override public IMessage onMessage(S2CSetClientTeam msg, MessageContext ctx) {
                     ClientTeam.set(msg.teamId);
@@ -191,17 +194,15 @@ public final class Net {
             owner = ByteBufUtils.readUTF8String(buf);
         }
 
-        @SideOnly(Side.CLIENT)
-        public static class Handler implements IMessageHandler<S2CFlagOwner, IMessage> {
-            @Override public IMessage onMessage(S2CFlagOwner msg, MessageContext ctx) {
-                Minecraft.getMinecraft().addScheduledTask(() -> {
-                    World w = Minecraft.getMinecraft().world;
-                    if (w == null) return;
-                    TileEntity te = w.getTileEntity(msg.pos);
-                    if (te instanceof TileEntityFlag) {
-                        System.out.println("[Received Packet] :" + msg.owner);
-                        ((TileEntityFlag) te).setOwner(msg.owner);
-                        ClientTeam.setOwner(msg.owner);
+        public static final class Handler implements IMessageHandler<S2CFlagOwner, IMessage> {
+            @Override
+            public IMessage onMessage(S2CFlagOwner msg, MessageContext ctx) {
+                // schedule on the correct thread
+                IThreadListener thread = FMLCommonHandler.instance().getWorldThread(ctx.netHandler);
+                thread.addScheduledTask(() -> {
+                    if (ctx.side.isClient()) {
+                        // call into a client-only helper
+                        ClientHooks.applyFlagOwner(msg.pos, msg.owner);
                     }
                 });
                 return null;

@@ -9,6 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import poisontrigger.kteams.Blocks.BlockFlag;
@@ -101,8 +102,16 @@ public class bindFlag {
     /** Raycast from player eyes to a block, then normalize to TOP if it’s a flag. */
     @javax.annotation.Nullable
     private static BlockPos raycastFlagTop(World world, EntityPlayerMP p) {
-        double reach = p.interactionManager.getBlockReachDistance();
-        RayTraceResult rt = p.rayTrace(reach, 1.0f);
+        final double reach = p.interactionManager.getBlockReachDistance(); // server-safe
+        final float pt = 1.0F; // no interpolation needed on server tick
+
+        final Vec3d eyes = p.getPositionEyes(pt);
+        final Vec3d look = p.getLook(pt);
+        final Vec3d end  = eyes.add(look.x * reach, look.y * reach, look.z * reach);
+
+        // stopOnLiquid=false, ignoreBlockWithoutBoundingBox=false, returnLastUncollidableBlock=false
+        final RayTraceResult rt = world.rayTraceBlocks(eyes, end, false, false, false);
+
         if (rt == null || rt.typeOfHit != RayTraceResult.Type.BLOCK) return null;
         return normalizeToTop(world, rt.getBlockPos());
     }

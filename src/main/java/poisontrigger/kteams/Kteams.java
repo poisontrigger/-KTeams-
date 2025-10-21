@@ -54,14 +54,14 @@ public class Kteams {
      */
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
+        configHandler.init(event.getSuggestedConfigurationFile());
         ModBlocks.preInit();
         ModTiles.register();
-
+        poisontrigger.kteams.network.Net.init();
     }
     @Mod.EventHandler
     @SideOnly(Side.CLIENT)
     public void preinitC(FMLPreInitializationEvent event) {
-        configHandler.init(event.getModConfigurationDirectory());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlag.class, new RenderFlag());
     }
 
@@ -71,7 +71,6 @@ public class Kteams {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
     // Register Event Handlers Here
-        poisontrigger.kteams.network.Net.init();
         MinecraftForge.EVENT_BUS.register(new ChunkLogger());
         MinecraftForge.EVENT_BUS.register(new BlockBreak());
         MinecraftForge.EVENT_BUS.register(new BlockPlace());
