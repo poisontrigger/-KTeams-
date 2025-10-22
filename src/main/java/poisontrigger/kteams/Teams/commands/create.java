@@ -7,6 +7,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import poisontrigger.kteams.Teams.ChatTeamPrefix;
+import poisontrigger.kteams.Teams.ClientTeam;
 import poisontrigger.kteams.Teams.TeamAPI;
 
 import java.util.Locale;
@@ -22,6 +24,7 @@ public class create {
             UUID uuid = ((EntityPlayerMP) sender).getUniqueID();
             boolean ok = TeamAPI.createTeam(sender.getEntityWorld(), id, display, uuid);
             sender.sendMessage(new TextComponentString(ok ? ("Created team '" + id + "'") : "team already exists."));
+            ChatTeamPrefix.apply(sender.getName(), id);
         }
     }
 }

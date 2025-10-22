@@ -6,6 +6,7 @@ import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
+import poisontrigger.kteams.Teams.ChatTeamPrefix;
 import poisontrigger.kteams.Teams.TeamData;
 import poisontrigger.kteams.util.UuidResolver;
 
@@ -37,8 +38,9 @@ public class kick {
         if (!isOwner && !isElder) throw new CommandException("kteams.command.generic.elderonly");
         if(!(server.getPlayerList().getPlayerByUsername(targetName) == null)) server.getPlayerList().getPlayerByUsername(targetName).sendMessage(new TextComponentString("§7[kTeams]§c " + "you have been kicked from §e"+team.name+" §cby: §e" +getCommandSenderAsPlayer(sender).getName() + "§c."));
         data.removeMember(team.id,target);
+        ChatTeamPrefix.clear(targetName);
         data.broadcastToTeam(team.id,new TextComponentString("§7[§rkTeams§7]§e " + UuidResolver.nameForUuid(server,target,false,"[UNKNOWN]") + "§c has been kicked from the team by: §e" +getCommandSenderAsPlayer(sender).getName() + "§c."));
-        // Send message to all online members
+            // Send message to all online members
 
     }
 }

@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import poisontrigger.kteams.Teams.ChatTeamPrefix;
 import poisontrigger.kteams.Teams.TeamData;
 
 import java.util.UUID;
@@ -49,6 +50,7 @@ public class leave {
         team.elders.remove(playerId);
         team.members.remove(playerId);
         data.getTeamOf(playerId);
+        ChatTeamPrefix.clear(p.getName());
 
         data.markDirty();
 

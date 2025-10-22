@@ -74,6 +74,7 @@ public class TeamCommands extends CommandBase {
                 EntityPlayerMP p = getCommandSenderAsPlayer(sender);
                 TeamData data = TeamData.get(p.world);
                 if (!data.acceptInvite(p)) return;
+                ChatTeamPrefix.apply(sender.getName(), "&7[&f"+data.getTeamOf(getCommandSenderAsPlayer(sender).getUniqueID()).id+"&7]&r");
                 return;
             }
             case "deny": {
@@ -173,6 +174,7 @@ public class TeamCommands extends CommandBase {
                     throw new CommandException("kteams.command.no_permission");
                 }
                 kick.kick(sender,args,server);
+
                 return;
 
             }

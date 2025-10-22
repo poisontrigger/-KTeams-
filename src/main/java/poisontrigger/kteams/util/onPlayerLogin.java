@@ -6,6 +6,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import poisontrigger.kteams.Kteams;
+import poisontrigger.kteams.Teams.ChatTeamPrefix;
+import poisontrigger.kteams.Teams.TeamData;
 
 
 @Mod.EventBusSubscriber(modid = Kteams.MOD_ID)
@@ -20,7 +22,7 @@ public final class onPlayerLogin {
 
         // Grab the player's team
         String id = poisontrigger.kteams.Teams.TeamData.get(mp.world).getTeamIdOf(mp.getUniqueID());
-
+            ChatTeamPrefix.apply(mp.getName(), "&7[&f"+id+"&7]&r");
         // Fallback when no team is set
         String idF = (id != null ? id : "wilderness");
 
