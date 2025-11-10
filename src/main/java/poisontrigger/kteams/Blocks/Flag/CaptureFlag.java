@@ -4,6 +4,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ClassInheritanceMultiMap;
 import net.minecraft.util.SoundCategory;
@@ -16,6 +17,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import poisontrigger.kteams.Raids.Raid;
+import poisontrigger.kteams.Raids.RaidManager;
 import poisontrigger.kteams.Sounds.ModSounds;
 import poisontrigger.kteams.Teams.TeamData;
 import poisontrigger.kteams.network.Net;
@@ -91,7 +94,7 @@ public class CaptureFlag {
             //win method
             te.setKind(TileEntityFlag.FlagKind.DECORATIVE);
             te.getWorld().playSound(null, te.getPos(), ModSounds.FLAG_CAPTURE_COMPLETE, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            data.broadcastToPlayers(FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers(), new TextComponentString("§7[kTeams] §a" + prevOwner + " has won the event!"));
+            onFlagCaptured(te.getWorld(),pos,prevOwner,te.getBinderTeamId());
             return;
         }
 
@@ -179,5 +182,26 @@ public class CaptureFlag {
         } else {
             System.out.println("[CLIENT] tried to send flag owner");
         }
+    }
+    public static void onFlagCaptured(World world, BlockPos pos, String oldOwnerTeamId, String newOwnerTeamId){
+        if (world.isRemote) return;
+        MinecraftServer server = world.getMinecraftServer();
+        if (server == null) return;
+
+        TeamData data = TeamData.get(world);
+        TeamData.Team oldTeam = data.getAllTeamsView().get(oldOwnerTeamId);
+        TeamData.Team newTeam = data.getAllTeamsView().get(newOwnerTeamId);;
+
+        if (oldTeam == null || newTeam == null) return;
+
+        Raid raid = RaidManager.INSTANCE.getRaidBetween(oldTeam, newTeam);
+        if (raid == null) return;
+        if (raid.getStage() != Raid.RaidStage.ACTIVE) return;
+
+        // If the capturing team is the attackers & captured defenders' flag → attackers win
+        // If the capturing team is the defenders & captured attackers' flag → defenders win
+        TeamData.Team winner = newTeam;
+        String reason = "Team " + newTeam.name + " captured " + oldTeam.name + "'s flag!";
+        RaidManager.INSTANCE.endRaid(server, raid, winner, reason);
     }
 }

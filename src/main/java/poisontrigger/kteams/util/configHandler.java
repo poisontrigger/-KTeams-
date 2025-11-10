@@ -28,6 +28,14 @@ public class configHandler {
     public static int maxClaimCommandRadius;
     public static int maxClaims;
     public static int homeWarmupSeconds;
+    // Raid Config
+    public static String raidType1Reward;
+    public static String raidType2Reward;
+    public static String raidType3Reward;
+    public static String raidType4Reward;
+    public static String raidType5Reward;
+    public static int raidPrepMinutes;
+    public static int raidActiveMinutes;
 
     public static void init(File configDir){
         if (cfg == null){
@@ -41,6 +49,7 @@ public class configHandler {
 
         String C_CAPTURE = "capture";
         String C_TEAMS = "teams";
+        String C_RAID = "raid";
 
         capDelay   = cfg.getInt("tickInterval", C_CAPTURE, 5, 1, 40, "Ticks between capture updates.");
         capRadius         = cfg.getFloat("radius", C_CAPTURE, 7.0f, 1.0f, 32.0f, "Player check radius (blocks). RENDER");
@@ -54,6 +63,13 @@ public class configHandler {
         ignoreSpectators = cfg.getBoolean("ignoreSpectators", C_CAPTURE,true, "Should spectators be forbidden from capturing points?" );
         ignoreCreative = cfg.getBoolean("ignoreCreative", C_CAPTURE,false, "Should players in creative mode be forbidden from capturing points?" );
         homeWarmupSeconds=cfg.getInt("homeWarmup", C_TEAMS, 5,0, 60,"How long should it take to run the /t home command");
+        raidType1Reward=cfg.getString("raidType1Reward", C_RAID, "", "Reward for winning a Type 1 Raid");
+        raidType2Reward=cfg.getString("raidType2Reward", C_RAID, "", "Reward for winning a Type 2 Raid");
+        raidType3Reward=cfg.getString("raidType3Reward", C_RAID, "", "Reward for winning a Type 3 Raid");
+        raidType4Reward=cfg.getString("raidType4Reward", C_RAID, "", "Reward for winning a Type 4 Raid");
+        raidType5Reward=cfg.getString("raidType5Reward", C_RAID, "", "Reward for winning a Type 5 Raid");
+        raidActiveMinutes=cfg.getInt("raidActiveMinutes", C_RAID,20,1,9999,"How long should a raid last?");
+        raidActiveMinutes=cfg.getInt("raidActiveMinutes", C_RAID,10,1,9999,"How long should the prep time be?");
         if (cfg.hasChanged()) cfg.save();
     }
 
