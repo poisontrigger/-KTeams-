@@ -74,7 +74,7 @@ public class TeamCommands extends CommandBase {
                 EntityPlayerMP p = getCommandSenderAsPlayer(sender);
                 TeamData data = TeamData.get(p.world);
                 if (!data.acceptInvite(p)) return;
-                ChatTeamPrefix.apply(sender.getName(), "&7[&f"+data.getTeamOf(getCommandSenderAsPlayer(sender).getUniqueID()).id+"&7]&r");
+                ChatTeamPrefix.apply(getCommandSenderAsPlayer(sender).getName(), "&7[&f"+data.getTeamOf(getCommandSenderAsPlayer(sender).getUniqueID()).id+"&7]&r");
                 return;
             }
             case "deny": {
