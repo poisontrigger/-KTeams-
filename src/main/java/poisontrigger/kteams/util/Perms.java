@@ -29,6 +29,12 @@ public class Perms {
     public static final String TEAM_HOME = ROOT + ".team.home";
     public static final String TEAM_LEAVE = ROOT + ".team.leave";
     public static final String TEAM_F_CLEAR_DESC = ROOT + ".team.fcleardesc";
+    public static final String TEAM_RAID = ROOT + ".team.raid";
+    public static final String TEAM_RAID_1 = ROOT + ".team.raid.1";
+    public static final String TEAM_RAID_2 = ROOT + ".team.raid.2";
+    public static final String TEAM_RAID_3 = ROOT + ".team.raid.3";
+    public static final String TEAM_RAID_4 = ROOT + ".team.raid.4";
+    public static final String TEAM_RAID_5 = ROOT + ".team.raid.5";
 
 
 
@@ -58,6 +64,13 @@ public class Perms {
         PermissionAPI.registerNode(TEAM_HOME, DefaultPermissionLevel.ALL, "Teleport to your team's home.");
         PermissionAPI.registerNode(TEAM_LEAVE, DefaultPermissionLevel.ALL, "leave your current team");
         PermissionAPI.registerNode(TEAM_F_CLEAR_DESC, DefaultPermissionLevel.OP, "Force clears a team's description"); // ADMIN
+        PermissionAPI.registerNode(TEAM_RAID, DefaultPermissionLevel.ALL,"Start a raid");
+        PermissionAPI.registerNode(TEAM_RAID_1, DefaultPermissionLevel.ALL,"Start a raid - Level 1");
+        PermissionAPI.registerNode(TEAM_RAID_2, DefaultPermissionLevel.ALL,"Start a raid - Level 2");
+        PermissionAPI.registerNode(TEAM_RAID_3, DefaultPermissionLevel.ALL,"Start a raid - Level 3");
+        PermissionAPI.registerNode(TEAM_RAID_4, DefaultPermissionLevel.ALL,"Start a raid - Level 4");
+        PermissionAPI.registerNode(TEAM_RAID_5, DefaultPermissionLevel.ALL,"Start a raid - Level 5");
+
     }
     public Perms(){}
 }
