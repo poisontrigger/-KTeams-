@@ -22,7 +22,8 @@ public final class onPlayerLogin {
 
         // Grab the player's team
         String id = poisontrigger.kteams.Teams.TeamData.get(mp.world).getTeamIdOf(mp.getUniqueID());
-            ChatTeamPrefix.apply(mp.getName(), "&7[&f"+id+"&7]&r");
+        if (e.player.getEntityWorld().isRemote){
+            ChatTeamPrefix.apply(mp.getName(), "&7[&f"+id+"&7]&r");}
         // Fallback when no team is set
         String idF = (id != null ? id : "wilderness");
 
