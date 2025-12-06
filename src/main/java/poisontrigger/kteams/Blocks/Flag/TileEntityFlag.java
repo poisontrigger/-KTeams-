@@ -86,11 +86,8 @@ public class TileEntityFlag extends TileEntity implements ITickable {
         if (world == null || world.isRemote ||this.kind == FlagKind.DECORATIVE) return;
         long delay = 10L;
         if ((world.getTotalWorldTime() % delay) == 0L) {
-
-            System.out.println("[Flag] " + pos + " owner=" + getTeamInControl() + " points=" + getPoints());
             CaptureFlag.capture(world, pos, this);
             setCaptureProgress();
-            System.out.println(captureProgress);
         }
         if (capturing) {
 
