@@ -12,7 +12,6 @@ public class ModBlocks {
     // Taken From HBM CE - Credit To Them For This Code : https://github.com/MisterNorwood/Hbm-s-Nuclear-Tech-CE/blob/master/src/main/java/com/hbm/blocks/ModBlocks.java
     public static List<Block> ALL_BLOCKS = new ArrayList<>();
 
-    public static final Block k_flag = new BlockBase(Material.CLOTH,"k_flag");
     public static final BlockFlag FLAG = new BlockFlag("flag");
 
     public static void preInit(){

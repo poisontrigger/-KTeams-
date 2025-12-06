@@ -21,11 +21,6 @@ public class onModelRegistryClient {
 
 
 
-
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(ModBlocks.k_flag),0,
-                new ModelResourceLocation(ModBlocks.k_flag.getRegistryName(),"normal")
-        );
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(ModBlocks.FLAG),
                 0,

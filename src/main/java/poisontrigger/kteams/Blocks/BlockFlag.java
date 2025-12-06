@@ -8,6 +8,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.SoundType;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -42,16 +43,15 @@ public class BlockFlag extends Block {
             PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public BlockFlag(String name) {
-        super(Material.IRON);
+        super(Material.CLOTH);
         setHardness(1.5F);
         setSoundType(SoundType.METAL);
         setLightOpacity(0);
-        setDefaultState(blockState.getBaseState()
-                .withProperty(PART, Part.BASE)
-                .withProperty(FACING, EnumFacing.NORTH));
+        setDefaultState(blockState.getBaseState().withProperty(PART, Part.BASE).withProperty(FACING, EnumFacing.NORTH));
         setRegistryName(Kteams.MOD_ID, name);
         setTranslationKey(Kteams.MOD_ID + "." + getRegistryName().getPath());
         ModBlocks.ALL_BLOCKS.add(this);
+        this.setCreativeTab(CreativeTabs.DECORATIONS);
     }
 
 
